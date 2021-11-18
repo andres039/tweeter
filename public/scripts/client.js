@@ -59,7 +59,6 @@ $('#arrow').click(
       $container.prepend(createTweetElement(arr[key]));
     })
     
-    console.log('this is the container:', $container)
     return $container;
   };
   
@@ -106,6 +105,7 @@ $('#arrow').click(
     })
     .then(function (tweet) {
       renderTweets(tweet)
+      document.querySelector(".textarea").reset();
   });
   }
   loadTweets()
