@@ -7,7 +7,13 @@
 $(document).ready(function () {
 
  
-//Slide the new tweet box
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+  
+  //Slide the new tweet box
 
 $('#arrow').click(
   function() {
@@ -28,7 +34,7 @@ $('#arrow').click(
     </header>
     <main>
             <p>
-              ${tweet.content.text}
+              ${escape(tweet.content.text)}
             </p>
           </main>
           <footer id='tweet-foot'>
@@ -84,7 +90,7 @@ $('#arrow').click(
     $.ajax({
       method: "POST",
       url: "http://localhost:8080/tweets",
-      data: $( this ).serialize()
+      data: $( this ).serialize()  //<= is it here? val() or text()?
     }).then( function () {
       loadTweets()
     }
