@@ -1,6 +1,6 @@
  
  .tweet {
-   margin-bottom: 4rem;
+   margin-block: 3rem;
    min-height: fit-content;
  }
  .tweet article header {
@@ -29,7 +29,6 @@ h3 {
 article {
   display: flex;
   flex-flow: row wrap;
-  /* max-height: 27rem; */
   min-height: fit-content;
   border: black solid 3px;
   padding-inline: 2rem;

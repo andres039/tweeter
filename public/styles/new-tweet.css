@@ -1,6 +1,8 @@
-new-tweet {
-  display: flex;
-}
+
+
+.new-tweet {
+  display: none;
+} 
 
 #tweet-text {
   width: 90vw;

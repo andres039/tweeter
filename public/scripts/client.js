@@ -6,6 +6,13 @@
 
 $(document).ready(function () {
 
+ 
+//Slide the new tweet box
+
+$('#arrow').click(
+  function() {
+    $('.new-tweet').slideDown()
+  })
   const createTweetElement = function (tweet) {
 
     let $tweet = `
@@ -54,17 +61,24 @@ $(document).ready(function () {
   //Submit form
 
   $( ".textarea" ).submit(function( event ) {
+    
+    event.preventDefault();
+    //clean up any leftover error messages
     $('#empty').slideUp();
     $('#long-error').slideUp();
-    event.preventDefault();
+    $('.new-tweet').slideUp()
     //form validation checks
     const newTweetData = event.target[0].value
     if (!newTweetData) {
-      return $('#empty').slideDown()
+      $('#empty').slideDown()
+      $('.new-tweet').slideDown()
+      return
     }
   
-    if (newTweetData.length > 2) {
-      return $('#long-error').slideDown()
+    if (newTweetData.length > 140) {
+      $('#long-error').slideDown()
+      $('.new-tweet').slideDown()
+      return
     }
     
     $.ajax({
