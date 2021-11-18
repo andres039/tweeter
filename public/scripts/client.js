@@ -40,12 +40,12 @@ $('#arrow').click(
           <footer id='tweet-foot'>
             <div class='foot-content'>
             <p>${timeago.format(tweet.created_at)}</p>
+            </div>
             <div id='icons'>
               <i class="fa-solid fa-flag"></i>
               <i class="fa-solid fa-repeat"></i>
               <i class="fa-solid fa-heart"></i>
             </div>
-          </div>
           </footer>
         </article>
         </section>`
