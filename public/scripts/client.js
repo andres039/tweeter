@@ -3,39 +3,14 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-// const data = [
-//   {
-//     user: {
-//       name: "Newton",
-//       avatars: "https://i.imgur.com/73hZDYK.png",
-//       handle: "@SirIsaac",
-//     },
-//     content: {
-//       text: "If I have seen further it is by standing on the shoulders of giants",
-//     },
-//     created_at: 1461116232227,
-//   },
-//   {
-//     user: {
-//       name: "Descartes",
-//       avatars: "https://i.imgur.com/nlhLi3I.png",
-//       handle: "@rd",
-//     },
-//     content: {
-//       text: "Je pense , donc je suis",
-//     },
-//     created_at: 1461113959088,
-//   },
-// ];
-
-
 
 $(document).ready(function () {
 
   const createTweetElement = function (tweet) {
-    //article has to be the outside type
-    let $tweet = ` 
+
+    let $tweet = `
     <section class='tweet'>
+
   <article>
     <header>
       <div class='avatar'>
@@ -60,16 +35,18 @@ $(document).ready(function () {
           </div>
           </footer>
         </article>
-        </section>
-      `;
+        </section>`
+      ;
     return $tweet;
   };
 
   const renderTweets = function (arr) {
     const $container = $(".container");
     $.each(arr, (key) => {
-      $container.append(createTweetElement(arr[key]));
-    });
+      $container.prepend(createTweetElement(arr[key]));
+    })
+    
+    console.log('this is the container:', $container)
     return $container;
   };
   
@@ -77,16 +54,27 @@ $(document).ready(function () {
   //Submit form
 
   $( ".textarea" ).submit(function( event ) {
-   
-    
+    $('#empty').slideUp();
+    $('#long-error').slideUp();
     event.preventDefault();
-    console.log('serialzied:', $( this ).serialize() );
-
+    //form validation checks
+    const newTweetData = event.target[0].value
+    if (!newTweetData) {
+      return $('#empty').slideDown()
+    }
+  
+    if (newTweetData.length > 2) {
+      return $('#long-error').slideDown()
+    }
+    
     $.ajax({
       method: "POST",
       url: "http://localhost:8080/tweets",
       data: $( this ).serialize()
-    })
+    }).then( function () {
+      loadTweets()
+    }
+    )
   });
 
   //fetching tweets from /tweets page
@@ -97,7 +85,7 @@ $(document).ready(function () {
       url: 'http://localhost:8080/tweets',
     })
     .then(function (tweet) {
-      renderTweets(tweet);
+      renderTweets(tweet)
   });
   }
   loadTweets()
