@@ -5,22 +5,18 @@
  */
 
 $(document).ready(function () {
-
- 
   const escape = function (str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
-  
+
   //Slide the new tweet box
 
-$('#arrow').click(
-  function() {
-    $('.new-tweet').slideDown()
-  })
+  $("#arrow").click(function () {
+    $(".new-tweet").slideDown();
+  });
   const createTweetElement = function (tweet) {
-
     let $tweet = `
     <section class='tweet'>
 
@@ -34,7 +30,13 @@ $('#arrow').click(
     </header>
     <main>
             <p>
-              ${escape(tweet.content.text)}
+              ${escape(
+                tweet.content.text.length > 60
+                  ? tweet.content.text.slice(0, 60) +
+                      "\n" +
+                      tweet.content.text.slice(60, tweet.content.text.length)
+                  : tweet.content.text
+              )}
             </p>
           </main>
           <footer id='tweet-foot'>
@@ -48,8 +50,7 @@ $('#arrow').click(
             </div>
           </footer>
         </article>
-        </section>`
-      ;
+        </section>`;
     return $tweet;
   };
 
@@ -57,57 +58,54 @@ $('#arrow').click(
     const $container = $(".container");
     $.each(arr, (key) => {
       $container.prepend(createTweetElement(arr[key]));
-    })
-    
+    });
+
     return $container;
   };
-  
 
-  //Submit form
+  //Submits form
+  const $form = $(".textarea");
 
-  $( ".textarea" ).submit(function( event ) {
-    
+  $form.submit(function (event) {
     event.preventDefault();
-    //clean up any leftover error messages
-    $('#empty').slideUp();
-    $('#long-error').slideUp();
-    $('.new-tweet').slideUp()
+    //cleans up any leftover error messages
+    $("#empty").slideUp();
+    $("#long-error").slideUp();
+    $(".new-tweet").slideUp();
     //form validation checks
-    const newTweetData = event.target[0].value
+    const newTweetData = event.target[0].value;
     if (!newTweetData) {
-      $('#empty').slideDown()
-      $('.new-tweet').slideDown()
-      return
+      $("#empty").slideDown();
+      $(".new-tweet").slideDown();
+      return;
     }
-  
+
     if (newTweetData.length > 140) {
-      $('#long-error').slideDown()
-      $('.new-tweet').slideDown()
-      return
+      $("#long-error").slideDown();
+      $(".new-tweet").slideDown();
+      return;
     }
-    
+
     $.ajax({
       method: "POST",
       url: "http://localhost:8080/tweets",
-      data: $( this ).serialize()  //<= is it here? val() or text()?
-    }).then( function () {
-      loadTweets()
-    }
-    )
+      data: $(this).serialize()
+    }).then(function () {
+      loadTweets();
+    });
   });
 
   //fetching tweets from /tweets page
 
-  const loadTweets = function() {
+  const loadTweets = function () {
     $.ajax({
-      method: 'GET',
-      url: 'http://localhost:8080/tweets',
-    })
-    .then(function (tweet) {
-      renderTweets(tweet)
+      method: "GET",
+      url: "http://localhost:8080/tweets",
+    }).then(function (tweet) {
+      renderTweets(tweet);
+      //resets the form
       document.querySelector(".textarea").reset();
-  });
-  }
-  loadTweets()
+    });
+  };
+  loadTweets();
 });
-
