@@ -18,7 +18,7 @@ This repository is the starter code for the project: Students will fork and clon
 - Node 5.10.x or above
 
 ## Screenshots
-
+!["Home page"](https://github.com/andres039/tweeter/blob/main/public/docs/HomePage.png?raw=true)
 
 !["Home page"] (https://github.com/andres039/tweeter/blob/main/public/docs/HomePage.png) 
 !["Error example"] (https://github.com/andres039/tweeter/blob/main/public/docs/error.png) 
