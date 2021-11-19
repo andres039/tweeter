@@ -19,7 +19,5 @@ This repository is the starter code for the project: Students will fork and clon
 
 ## Screenshots
 !["Home page"](https://github.com/andres039/tweeter/blob/main/public/docs/HomePage.png?raw=true)
-
-!["Home page"] (https://github.com/andres039/tweeter/blob/main/public/docs/HomePage.png) 
-!["Error example"] (https://github.com/andres039/tweeter/blob/main/public/docs/error.png) 
-!["Slide Form"] (https://github.com/andres039/tweeter/blob/main/public/docs/slideForm.png)
+!["Error"](https://github.com/andres039/tweeter/blob/main/public/docs/error.png?raw=true)
+!["Slide form"](https://github.com/andres039/tweeter/blob/main/public/docs/slideForm.png?raw=true)
