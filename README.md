@@ -16,3 +16,10 @@ This repository is the starter code for the project: Students will fork and clon
 
 - Express
 - Node 5.10.x or above
+
+## Screenshots
+
+
+!["Home page"] (https://github.com/andres039/tweeter/blob/main/public/docs/HomePage.png) 
+!["Error example"] (https://github.com/andres039/tweeter/blob/main/public/docs/error.png) 
+!["Slide Form"] (https://github.com/andres039/tweeter/blob/main/public/docs/slideForm.png)
